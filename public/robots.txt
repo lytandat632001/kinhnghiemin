@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kinhnghiemin.pages.dev/sitemap-index.xml
+Sitemap: https://kinhnghiemin.pages.dev/sitemap.xml
