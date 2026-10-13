@@ -4,59 +4,67 @@ import { products } from "../config/site";
 ---
 
 <BaseLayout
-  title="Yêu cầu báo giá — In Ấn Pro"
+  title="Yêu cầu báo giá — Kinh Nghiệm In"
   description="Gửi yêu cầu báo giá in ấn. Tôi sẽ liên hệ lại trong thời gian sớm nhất."
 >
-  <section class="page-hero">
+  <section class="quote-hero">
     <div class="container">
+      <span class="badge">📝 Báo giá nhanh</span>
       <h1>Yêu cầu báo giá</h1>
       <p>Điền thông tin bên dưới, tôi sẽ liên hệ tư vấn và báo giá trong thời gian sớm nhất.</p>
     </div>
   </section>
 
-  <section class="quote-body">
+  <section class="section">
     <div class="container container-narrow">
       <form id="quote-form" class="quote-form" novalidate>
-        <div class="form-row">
-          <label for="name">Họ và tên <span class="req">*</span></label>
-          <input type="text" id="name" name="name" required maxlength="100" />
-        </div>
+        <div class="form-section">
+          <h3 class="form-section-title">Thông tin liên hệ</h3>
 
-        <div class="form-row">
-          <label for="phone">Số điện thoại <span class="req">*</span></label>
-          <input type="tel" id="phone" name="phone" required maxlength="20" />
-        </div>
-
-        <div class="form-row">
-          <label for="product">Loại sản phẩm <span class="req">*</span></label>
-          <select id="product" name="product" required>
-            <option value="">— Chọn loại sản phẩm —</option>
-            {products.map((p) => (
-              <option value={p.slug}>{p.name}</option>
-            ))}
-            <option value="khac">Khác / chưa xác định</option>
-          </select>
-        </div>
-
-        <div class="form-row-2">
           <div class="form-row">
-            <label for="size">Kích thước / quy cách</label>
-            <input type="text" id="size" name="size" maxlength="200" placeholder="VD: 5x5cm, A4..." />
+            <label for="name">Họ và tên <span class="req">*</span></label>
+            <input type="text" id="name" name="name" required maxlength="100" placeholder="VD: Nguyễn Văn A" />
           </div>
 
           <div class="form-row">
-            <label for="quantity">Số lượng dự kiến</label>
-            <input type="text" id="quantity" name="quantity" maxlength="50" placeholder="VD: 1000" />
+            <label for="phone">Số điện thoại <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" required maxlength="20" placeholder="VD: 0901 234 567" />
           </div>
         </div>
 
-        <div class="form-row">
-          <label for="message">Mô tả thêm</label>
-          <textarea id="message" name="message" rows="5" maxlength="2000"
-            placeholder="Mô tả nhu cầu, chất liệu mong muốn, thời gian cần hàng..."></textarea>
+        <div class="form-section">
+          <h3 class="form-section-title">Thông tin sản phẩm</h3>
+
+          <div class="form-row">
+            <label for="product">Loại sản phẩm <span class="req">*</span></label>
+            <select id="product" name="product" required>
+              <option value="">— Chọn loại sản phẩm —</option>
+              {products.map((p) => (
+                <option value={p.slug}>{p.name}</option>
+              ))}
+              <option value="khac">Khác / chưa xác định</option>
+            </select>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-row">
+              <label for="size">Kích thước / quy cách</label>
+              <input type="text" id="size" name="size" maxlength="200" placeholder="VD: 5x5cm, A4..." />
+            </div>
+
+            <div class="form-row">
+              <label for="quantity">Số lượng dự kiến</label>
+              <input type="text" id="quantity" name="quantity" maxlength="50" placeholder="VD: 1000" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="message">Mô tả thêm</label>
+            <textarea id="message" name="message" rows="5" maxlength="2000" placeholder="Mô tả nhu cầu, chất liệu mong muốn, thời gian cần hàng..."></textarea>
+          </div>
         </div>
 
-        <div class="form-row consent">
+        <div class="form-consent">
           <label class="checkbox-label">
             <input type="checkbox" id="consent" name="consent" required />
             <span>Tôi đồng ý cung cấp thông tin để được tư vấn và báo giá.</span>
@@ -64,10 +72,10 @@ import { products } from "../config/site";
         </div>
 
         <p class="form-note">
-          File thiết kế (nếu có) sẽ được trao đổi qua Zalo hoặc email sau khi bạn gửi yêu cầu.
+          💡 File thiết kế (nếu có) sẽ được trao đổi qua Zalo hoặc email sau khi bạn gửi yêu cầu.
         </p>
 
-        <button type="submit" class="btn btn-primary btn-block">Gửi yêu cầu</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Gửi yêu cầu</button>
 
         <div id="form-message" class="form-message" hidden></div>
       </form>
@@ -76,95 +84,121 @@ import { products } from "../config/site";
 </BaseLayout>
 
 <style>
-  .page-hero {
-    padding: var(--space-lg) 0;
-    background: var(--color-primary-light);
+  .quote-hero {
+    padding: var(--space-16) 0 var(--space-12);
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
     text-align: center;
   }
 
-  .quote-body { padding: var(--space-xl) 0; }
+  .quote-hero h1 {
+    margin: var(--space-4) 0 var(--space-3);
+  }
 
-  .container-narrow {
-    max-width: 720px;
+  .quote-hero p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    max-width: 560px;
+    margin: 0 auto;
   }
 
   .quote-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
     background: #fff;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    border-radius: var(--radius-xl);
+    padding: var(--space-10);
+    box-shadow: var(--shadow-sm);
   }
 
-  .form-row { display: flex; flex-direction: column; gap: 0.4rem; }
+  @media (max-width: 640px) {
+    .quote-form { padding: var(--space-6); }
+  }
+
+  .form-section {
+    margin-bottom: var(--space-10);
+  }
+
+  .form-section-title {
+    font-size: var(--text-base);
+    color: var(--color-text);
+    padding-bottom: var(--space-3);
+    margin-bottom: var(--space-6);
+    border-bottom: 2px solid var(--color-primary-light);
+    font-weight: 700;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
 
   .form-row-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
+    gap: var(--space-4);
   }
 
   @media (max-width: 600px) {
-    .form-row-2 { grid-template-columns: 1fr; }
+    .form-row-2 { grid-template-columns: 1fr; gap: 0; }
   }
 
   .form-row label {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-soft);
   }
 
   .req { color: #dc2626; }
 
-  input[type="text"],
-  input[type="tel"],
-  select,
-  textarea {
-    padding: 0.7rem 0.9rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    font-family: inherit;
-    font-size: 1rem;
-    background: #fff;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    width: 100%;
+  .form-consent {
+    padding: var(--space-4);
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-5);
   }
-
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(30, 95, 191, 0.12);
-  }
-
-  textarea { resize: vertical; min-height: 100px; }
 
   .checkbox-label {
     display: flex;
-    gap: 0.6rem;
+    gap: var(--space-3);
     align-items: flex-start;
-    font-weight: 400;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-soft);
+    line-height: 1.5;
   }
 
-  .checkbox-label input { margin-top: 0.25rem; flex-shrink: 0; }
+  .checkbox-label input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
 
   .form-note {
     color: var(--color-text-muted);
-    font-size: 0.9rem;
-    padding: var(--space-xs) 0;
-    border-top: 1px dashed var(--color-border);
-    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    padding: var(--space-4);
+    background: var(--color-accent-light);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-6);
+    line-height: 1.6;
   }
 
-  .btn-block { width: 100%; padding: 0.9rem; font-size: 1.05rem; }
-
   .form-message {
-    padding: var(--space-sm);
-    border-radius: var(--radius-sm);
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-md);
     font-weight: 500;
     text-align: center;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .form-message.success {
@@ -179,6 +213,7 @@ import { products } from "../config/site";
     border: 1px solid #fca5a5;
   }
 </style>
+
 <script>
   import { initQuoteForm } from "../scripts/quote-form";
   initQuoteForm();

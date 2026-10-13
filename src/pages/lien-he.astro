@@ -1,71 +1,186 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../config/site";
+
+const contacts = [
+  {
+    icon: "📞",
+    label: "Điện thoại",
+    value: site.phoneDisplay,
+    href: `tel:${site.phone}`,
+    external: false,
+  },
+  {
+    icon: "💬",
+    label: "Zalo",
+    value: "Chat qua Zalo",
+    href: `https://zalo.me/${site.zalo}`,
+    external: true,
+  },
+  {
+    icon: "✉️",
+    label: "Email",
+    value: site.email,
+    href: `mailto:${site.email}`,
+    external: false,
+  },
+];
 ---
 
 <BaseLayout
-  title="Liên hệ — In Ấn Pro"
-  description="Thông tin liên hệ tư vấn in ấn."
+  title="Liên hệ — Kinh Nghiệm In"
+  description="Liên hệ tư vấn in ấn: gọi điện, nhắn Zalo hoặc gửi email."
 >
-  <section class="page-hero">
+  <section class="contact-hero">
     <div class="container">
-      <h1>Liên hệ</h1>
-      <p>Gọi điện, nhắn Zalo hoặc gửi yêu cầu để được tư vấn.</p>
+      <span class="badge">🐱 Liên hệ</span>
+      <h1>Liên hệ với Kinh Nghiệm In</h1>
+      <p>Chọn cách thuận tiện nhất để được tư vấn nhanh chóng.</p>
     </div>
   </section>
 
-  <section class="contact-body">
-    <div class="container contact-grid">
-      <div class="contact-card">
-        <h3>📞 Điện thoại</h3>
-        <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p>
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="contact-grid">
+        {contacts.map((c) => (
+          <a
+            href={c.href}
+            class="contact-card"
+            target={c.external ? "_blank" : undefined}
+            rel={c.external ? "noopener" : undefined}
+          >
+            <div class="contact-icon">{c.icon}</div>
+            <div class="contact-info">
+              <span class="contact-label">{c.label}</span>
+              <span class="contact-value">{c.value}</span>
+            </div>
+            <span class="contact-arrow" aria-hidden="true">→</span>
+          </a>
+        ))}
       </div>
 
-      <div class="contact-card">
-        <h3>💬 Zalo</h3>
-        <p><a href={`https://zalo.me/${site.zalo}`} target="_blank" rel="noopener">Chat qua Zalo</a></p>
-      </div>
-
-      <div class="contact-card">
-        <h3>✉️ Email</h3>
-        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
-      </div>
-
-      <div class="contact-card">
-        <h3>📝 Yêu cầu báo giá</h3>
-        <p><a href="/bao-gia">Điền form báo giá →</a></p>
+      <div class="contact-cta">
+        <h2>Hoặc gửi yêu cầu báo giá</h2>
+        <p>Điền form để mô tả nhu cầu chi tiết — tôi sẽ liên hệ lại trong thời gian sớm nhất.</p>
+        <a href="/bao-gia" class="btn btn-primary btn-lg">Yêu cầu báo giá</a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .page-hero {
-    padding: var(--space-lg) 0;
-    background: var(--color-primary-light);
+  .contact-hero {
+    padding: var(--space-16) 0 var(--space-12);
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
     text-align: center;
   }
 
-  .contact-body { padding: var(--space-xl) 0; }
+  .contact-hero h1 {
+    margin: var(--space-4) 0 var(--space-3);
+  }
+
+  .contact-hero p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
 
   .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
   }
 
   .contact-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-6);
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: var(--space-md);
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .contact-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: var(--color-text);
+  }
+
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-light);
+    border-radius: var(--radius-md);
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    transition: all var(--transition-base);
+  }
+
+  .contact-card:hover .contact-icon {
+    background: var(--color-primary);
+    transform: scale(1.05);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .contact-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-value {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .contact-arrow {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all var(--transition-base);
+  }
+
+  .contact-card:hover .contact-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .contact-cta {
+    margin-top: var(--space-12);
+    padding: var(--space-10) var(--space-8);
+    background: linear-gradient(135deg, #eff6ff, #fff7ed);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
     text-align: center;
   }
 
-  .contact-card h3 { margin-bottom: var(--space-sm); }
+  .contact-cta h2 {
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
 
-  .contact-card a {
-    font-weight: 600;
-    font-size: 1.05rem;
+  .contact-cta p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
