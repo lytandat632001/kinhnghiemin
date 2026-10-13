@@ -3,13 +3,20 @@ import { faqs } from "../config/site";
 ---
 
 <section class="faq-section">
-  <div class="container">
-    <h2>Câu hỏi thường gặp</h2>
+  <div class="container container-narrow">
+    <div class="section-head">
+      <span class="section-badge">Hỏi đáp</span>
+      <h2>Câu hỏi thường gặp</h2>
+      <p>Những thắc mắc phổ biến khi đặt in lần đầu.</p>
+    </div>
 
     <div class="faq-list">
-      {faqs.map((item) => (
-        <details class="faq-item">
-          <summary>{item.q}</summary>
+      {faqs.map((item, i) => (
+        <details class="faq-item" open={i === 0}>
+          <summary>
+            <span>{item.q}</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
           <p>{item.a}</p>
         </details>
       ))}
@@ -18,46 +25,104 @@ import { faqs } from "../config/site";
 </section>
 
 <style>
-  .faq-section { padding: var(--space-xl) 0; }
-  .faq-section h2 { text-align: center; margin-bottom: var(--space-lg); }
+  .container-narrow {
+    max-width: 800px;
+  }
+
+  .faq-section { padding: var(--space-20) 0; }
+
+  .section-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto var(--space-12);
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-4);
+  }
+
+  .section-head h2 { margin-bottom: var(--space-3); }
+  .section-head p { color: var(--color-text-muted); font-size: 1.05rem; }
 
   .faq-list {
-    max-width: 800px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-3);
   }
 
   .faq-item {
-    background: var(--color-bg-soft);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-    padding: var(--space-sm) var(--space-md);
+    background: #fff;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all 0.15s;
+    overflow: hidden;
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
   }
 
   .faq-item summary {
-    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
-    padding: 0.5rem 2rem 0.5rem 0;
+    padding: var(--space-5) var(--space-6);
     list-style: none;
+    color: var(--color-text);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
     position: relative;
+    background: var(--color-primary-light);
+    border-radius: 50%;
   }
 
-  .faq-item summary::after {
-    content: "+";
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
     position: absolute;
-    right: 0;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--color-primary);
+    top: 50%;
+    left: 50%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
   }
 
-  .faq-item[open] summary::after { content: "−"; }
+  .faq-icon::before { width: 12px; height: 2px; }
+  .faq-icon::after {
+    width: 2px;
+    height: 12px;
+    transition: transform 0.25s;
+  }
+
+  .faq-item[open] .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
 
   .faq-item p {
+    padding: 0 var(--space-6) var(--space-5);
     color: var(--color-text-muted);
-    padding: 0.5rem 0 0.75rem;
     font-size: 0.95rem;
+    line-height: 1.7;
   }
 </style>

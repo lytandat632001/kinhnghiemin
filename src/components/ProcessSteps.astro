@@ -4,8 +4,11 @@ import { processSteps } from "../config/site";
 
 <section class="process-section">
   <div class="container">
-    <h2>Quy trình làm việc</h2>
-    <p class="section-desc">4 bước đơn giản từ lúc bạn gửi yêu cầu đến khi nhận hàng.</p>
+    <div class="section-head">
+      <span class="section-badge">Quy trình</span>
+      <h2>Quy trình làm việc</h2>
+      <p>4 bước đơn giản từ lúc bạn gửi yêu cầu đến khi nhận hàng.</p>
+    </div>
 
     <div class="process-steps">
       {processSteps.map((s) => (
@@ -21,46 +24,87 @@ import { processSteps } from "../config/site";
 
 <style>
   .process-section {
-    padding: var(--space-xl) 0;
+    padding: var(--space-20) 0;
     background: var(--color-bg-soft);
   }
 
-  .process-section h2 { text-align: center; margin-bottom: var(--space-xs); }
-
-  .section-desc {
+  .section-head {
     text-align: center;
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-lg);
+    max-width: 680px;
+    margin: 0 auto var(--space-12);
   }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-4);
+  }
+
+  .section-head h2 { margin-bottom: var(--space-3); }
+  .section-head p { color: var(--color-text-muted); font-size: 1.05rem; }
 
   .process-steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--space-md);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
   }
 
   .step {
+    position: relative;
     background: #fff;
-    border-radius: var(--radius-lg);
-    padding: var(--space-md);
-    text-align: center;
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-6) var(--space-6);
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .step:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
   }
 
   .step-num {
-    width: 42px;
-    height: 42px;
-    background: var(--color-primary);
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    margin: 0 auto var(--space-sm);
-    font-size: 1.1rem;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin: -52px auto var(--space-5);
+    box-shadow: 0 6px 16px rgba(30, 95, 191, 0.35);
+    border: 4px solid #fff;
   }
 
-  .step h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
-  .step p { color: var(--color-text-muted); font-size: 0.92rem; }
+  .step h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+  }
+
+  .step p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .process-steps { grid-template-columns: 1fr; }
+  }
 </style>

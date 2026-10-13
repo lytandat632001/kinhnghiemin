@@ -5,45 +5,18 @@ import { site, nav } from "../config/site";
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="logo">
-      <span class="logo-mark" aria-hidden="true">KNI</span>
+      <span class="logo-mark">{site.shortName}</span>
       <span class="logo-text">{site.name}</span>
     </a>
 
-    <nav class="main-nav" aria-label="Menu chính">
+    <nav class="main-nav">
       {nav.map((item) => (
         <a href={item.href} class="nav-link">{item.label}</a>
       ))}
-    </nav>
-
-    <a href="/bao-gia" class="btn btn-primary header-cta">
-      Yêu cầu báo giá
-    </a>
-
-    <button class="menu-toggle" aria-label="Mở menu" id="menu-toggle">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <div class="mobile-menu" id="mobile-menu" hidden>
-    <nav class="mobile-nav">
-      {nav.map((item) => (
-        <a href={item.href}>{item.label}</a>
-      ))}
-      <a href="/bao-gia" class="btn btn-primary btn-block">Yêu cầu báo giá</a>
+      <a href="/bao-gia" class="btn btn-primary header-cta">Yêu cầu báo giá</a>
     </nav>
   </div>
 </header>
-
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("mobile-menu");
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      menu.hidden = !menu.hidden;
-      toggle.classList.toggle("is-open");
-    });
-  }
-</script>
 
 <style>
   .site-header {
@@ -68,14 +41,12 @@ import { site, nav } from "../config/site";
   .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    font-weight: 700;
-    font-size: var(--text-lg);
+    gap: 0.6rem;
+    font-weight: 800;
+    font-size: 1.15rem;
     color: var(--color-text);
-    text-decoration: none;
+    letter-spacing: -0.02em;
   }
-
-  .logo:hover { color: var(--color-text); }
 
   .logo-mark {
     display: inline-flex;
@@ -87,27 +58,24 @@ import { site, nav } from "../config/site";
     color: #fff;
     border-radius: var(--radius-md);
     font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 4px 12px rgba(30, 95, 191, 0.25);
   }
-
-  .logo-text { letter-spacing: -0.02em; }
 
   .main-nav {
     display: flex;
     align-items: center;
     gap: var(--space-6);
-    margin-left: auto;
   }
 
   .nav-link {
     color: var(--color-text-soft);
-    font-weight: 500;
-    font-size: var(--text-sm);
+    font-weight: 600;
+    font-size: 0.925rem;
     position: relative;
-    padding: var(--space-2) 0;
-    transition: color var(--transition-fast);
+    padding: 0.5rem 0;
+    transition: color 0.15s;
   }
 
   .nav-link::after {
@@ -119,7 +87,8 @@ import { site, nav } from "../config/site";
     height: 2px;
     background: var(--color-primary);
     transform: scaleX(0);
-    transition: transform var(--transition-base);
+    transition: transform 0.25s;
+    transform-origin: left;
   }
 
   .nav-link:hover { color: var(--color-primary); }
@@ -127,61 +96,10 @@ import { site, nav } from "../config/site";
 
   .header-cta {
     padding: 0.6rem 1.25rem;
-    font-size: var(--text-sm);
-  }
-
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    padding: 10px;
-  }
-
-  .menu-toggle span {
-    display: block;
-    height: 2px;
-    width: 100%;
-    background: var(--color-text);
-    border-radius: 2px;
-    transition: all var(--transition-base);
-  }
-
-  .menu-toggle.is-open span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-  .menu-toggle.is-open span:nth-child(2) { opacity: 0; }
-  .menu-toggle.is-open span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-
-  .mobile-menu {
-    border-top: 1px solid var(--color-border);
-    background: #fff;
-    padding: var(--space-4) var(--space-6) var(--space-6);
-  }
-
-  .mobile-nav {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .mobile-nav a:not(.btn) {
-    color: var(--color-text);
-    font-weight: 500;
-    padding: var(--space-3) 0;
-    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
   }
 
   @media (max-width: 900px) {
-    .main-nav, .header-cta { display: none; }
-    .menu-toggle { display: flex; }
+    .main-nav a:not(.btn) { display: none; }
   }
 </style>

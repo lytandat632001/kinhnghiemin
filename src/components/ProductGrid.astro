@@ -4,15 +4,21 @@ import { products } from "../config/site";
 
 <section class="products-section">
   <div class="container">
-    <h2>Nhóm sản phẩm chính</h2>
-    <p class="section-desc">Chọn nhóm phù hợp để xem chi tiết và yêu cầu báo giá.</p>
+    <div class="section-head">
+      <span class="section-badge">Sản phẩm</span>
+      <h2>Nhóm sản phẩm chính</h2>
+      <p>Chọn nhóm phù hợp để xem chi tiết và yêu cầu báo giá.</p>
+    </div>
 
     <div class="product-grid">
       {products.map((p) => (
         <a href={`/san-pham/${p.slug}`} class="product-card">
-          <div class="product-icon">{p.icon}</div>
+          <div class="product-icon-wrap">
+            <span class="product-icon">{p.icon}</span>
+          </div>
           <h3>{p.name}</h3>
           <p>{p.desc}</p>
+          <span class="product-arrow" aria-hidden="true">Tìm hiểu →</span>
         </a>
       ))}
     </div>
@@ -20,38 +26,132 @@ import { products } from "../config/site";
 </section>
 
 <style>
-  .products-section { padding: var(--space-xl) 0; }
-  .products-section h2 { text-align: center; margin-bottom: var(--space-xs); }
+  .products-section {
+    padding: var(--space-20) 0;
+  }
 
-  .section-desc {
+  .section-head {
     text-align: center;
+    max-width: 680px;
+    margin: 0 auto var(--space-12);
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-4);
+  }
+
+  .section-head h2 {
+    margin-bottom: var(--space-3);
+  }
+
+  .section-head p {
     color: var(--color-text-muted);
-    margin-bottom: var(--space-lg);
+    font-size: 1.05rem;
   }
 
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--space-md);
+    gap: var(--space-6);
   }
 
   .product-card {
+    position: relative;
     background: #fff;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-md);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-6);
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     color: var(--color-text);
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .product-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
   }
 
   .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-primary);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+    color: var(--color-text);
   }
 
-  .product-icon { font-size: 2.5rem; margin-bottom: var(--space-sm); }
-  .product-card h3 { margin-bottom: 0.5rem; color: var(--color-primary); }
-  .product-card p { color: var(--color-text-muted); font-size: 0.95rem; }
+  .product-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .product-icon-wrap {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary-light), #fff);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-5);
+    transition: all 0.3s;
+    border: 1px solid var(--color-border);
+  }
+
+  .product-card:hover .product-icon-wrap {
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+    transform: scale(1.08) rotate(-3deg);
+  }
+
+  .product-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .product-card h3 {
+    color: var(--color-text);
+    font-size: 1.15rem;
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+  }
+
+  .product-card p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: var(--space-4);
+  }
+
+  .product-arrow {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.25s;
+  }
+
+  .product-card:hover .product-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
 </style>

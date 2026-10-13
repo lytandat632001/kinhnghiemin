@@ -24,8 +24,11 @@ const latestPosts = (await getCollection("blog"))
   {latestPosts.length > 0 && (
     <section class="latest-posts">
       <div class="container">
-        <h2>Bài viết mới</h2>
-        <p class="section-desc">Kiến thức tư vấn in ấn dành cho chủ quán và doanh nghiệp.</p>
+        <div class="section-head">
+          <span class="section-badge">Blog</span>
+          <h2>Bài viết mới</h2>
+          <p>Kiến thức tư vấn in ấn dành cho chủ quán và doanh nghiệp.</p>
+        </div>
         <div class="blog-grid">
           {latestPosts.map((post) => (
             <BlogCard
@@ -38,7 +41,7 @@ const latestPosts = (await getCollection("blog"))
           ))}
         </div>
         <div class="view-all">
-          <a href="/blog" class="btn btn-outline">Xem tất cả bài viết</a>
+          <a href="/blog" class="btn btn-outline btn-lg">Xem tất cả bài viết →</a>
         </div>
       </div>
     </section>
@@ -48,23 +51,41 @@ const latestPosts = (await getCollection("blog"))
 </BaseLayout>
 
 <style>
-  .latest-posts { padding: var(--space-xl) 0; }
-  .latest-posts h2 { text-align: center; margin-bottom: var(--space-xs); }
-
-  .section-desc {
-    text-align: center;
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-lg);
+  .latest-posts {
+    padding: var(--space-20) 0;
+    background: var(--color-bg-soft);
   }
+
+  .section-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto var(--space-12);
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-4);
+  }
+
+  .section-head h2 { margin-bottom: var(--space-3); }
+  .section-head p { color: var(--color-text-muted); font-size: 1.05rem; }
 
   .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-md);
+    gap: var(--space-6);
   }
 
   .view-all {
     text-align: center;
-    margin-top: var(--space-lg);
+    margin-top: var(--space-10);
   }
 </style>
