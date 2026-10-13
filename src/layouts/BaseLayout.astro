@@ -22,9 +22,21 @@ const canonicalURL = PRIMARY_DOMAIN + Astro.url.pathname;
 const ogImage = PRIMARY_DOMAIN + image;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9ZD52Y54L"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-T9ZD52Y54L");
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
@@ -46,14 +58,21 @@ const ogImage = PRIMARY_DOMAIN + image;
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-16119113777"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-16119113777"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-16119113777');
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-16119113777");
     </script>
-    <meta name="google-site-verification" content="0u3Ksa4oEBf-RXq7YlBpvW_4ucln02YRV747Rg14uIY" />
+    <meta
+      name="google-site-verification"
+      content="0u3Ksa4oEBf-RXq7YlBpvW_4ucln02YRV747Rg14uIY"
+    />
   </head>
   <body>
     <Header />
