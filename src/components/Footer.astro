@@ -1,21 +1,129 @@
 ---
-import { site } from "../config/site";
+import { site, nav } from "../config/site";
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container">
-    <p>© {new Date().getFullYear()} {site.name} — Website đang trong quá trình xây dựng.</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <span class="footer-logo-mark">KNI</span>
+          <span>{site.name}</span>
+        </a>
+        <p class="footer-desc">{site.description}</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên kết</h4>
+        <ul>
+          {nav.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+          <li><a href="/bao-gia">Yêu cầu báo giá</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href={`tel:${site.phone}`}>📞 {site.phoneDisplay}</a></li>
+          <li><a href={`https://zalo.me/${site.zalo}`} target="_blank" rel="noopener">💬 Zalo</a></li>
+          <li><a href={`mailto:${site.email}`}>✉️ {site.email}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} {site.name}. Website đang trong quá trình xây dựng và hoàn thiện.</p>
+    </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background: var(--color-bg-soft);
-    border-top: 1px solid var(--color-border);
-    padding: var(--space-lg) 0;
-    margin-top: var(--space-xl);
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    color: #cbd5e1;
+    padding: var(--space-16) 0 var(--space-8);
+    margin-top: var(--space-20);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr;
+    gap: var(--space-10);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: #fff;
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-logo:hover { color: #fff; }
+
+  .footer-logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-desc {
+    color: #94a3b8;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    max-width: 420px;
+  }
+
+  .footer-col h4 {
+    color: #fff;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-5);
+    font-weight: 700;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer-col a {
+    color: #cbd5e1;
+    font-size: var(--text-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-col a:hover { color: #fff; }
+
+  .footer-bottom {
+    padding-top: var(--space-6);
     text-align: center;
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
+    color: #64748b;
+    font-size: var(--text-xs);
+  }
+
+  @media (max-width: 768px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
   }
 </style>

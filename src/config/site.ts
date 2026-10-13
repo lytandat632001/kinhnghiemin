@@ -1,19 +1,20 @@
 // ============================================
-// CẤU HÌNH TOÀN SITE
-// Muốn đổi tên shop / số điện thoại / menu → sửa ở đây
+// CẤU HÌNH TOÀN SITE — Kinh Nghiệm In
 // ============================================
 
 export const site = {
-  name: "In Ấn Pro",
-  shortName: "IA", // 2 chữ cái hiển thị trên logo
+  name: "Kinh Nghiệm In",
+  shortName: "KNI",
   description:
-    "Tư vấn và cung cấp giải pháp in ấn: tem dán ly, decal, hộp giấy, túi giấy, bao bì thực phẩm, danh thiếp.",
-  phone: "0349458387",       // TODO: thay số thật
+    "Chia sẻ kinh nghiệm chọn chất liệu, quy cách in và nhà in phù hợp cho quán cà phê, cửa hàng và doanh nghiệp.",
+  phone: "0349458387",
   phoneDisplay: "0349 458387",
-  zalo: "0349458387",         // TODO: thay số Zalo thật
-  email: "huyennhu1230@gmail.com",// TODO: thay email thật
-  address: "",                // để trống nếu chỉ làm online
-   formEndpoint: "https://script.google.com/macros/s/AKfycbzRycUtJskgeqneLvowpzG1mTkmZM86svAdrK_m4Hv1wIpQKVn2NyQmbpteba87uPD2/exec",
+  zalo: "0349458387",
+  email: "huyennhu1230@gmail.com",
+  address: "",
+  formEndpoint:
+    "https://script.google.com/macros/s/AKfycBzRyCUtJskgeqmelvowpzG1mTkmZMI86svAdK_m4Hv1wIpQKVn2NyQmbpteba8rUPD2/exec",
+  siteUrl: "https://kinhnghiemin.pages.dev",
 };
 
 export const nav = [
@@ -32,12 +33,12 @@ export interface Product {
   slug: string;
   icon: string;
   name: string;
-  desc: string;              // Mô tả ngắn cho card
-  intro: string;             // Tổng quan
-  useCases: string[];        // Đối tượng phù hợp
-  applications: string[];    // Ứng dụng phổ biến
-  materials: string[];       // Chất liệu (TODO: xác nhận với xưởng)
-  faqs: ProductFaq[];        // FAQ riêng
+  desc: string;
+  intro: string;
+  useCases: string[];
+  applications: string[];
+  materials: string[];
+  faqs: ProductFaq[];
 }
 
 export const products: Product[] = [
@@ -64,8 +65,14 @@ export const products: Product[] = [
       "Decal trong suốt — nhìn xuyên, tối giản",
     ],
     faqs: [
-      { q: "Tem có chống nước không?", a: "Tùy chất liệu. Decal nhựa PVC chống nước tốt, phù hợp ly đá. Decal giấy chỉ dùng ly không đổ mồ hôi." },
-      { q: "Đặt số lượng ít có nhận không?", a: "Bạn gửi số lượng dự kiến, tôi sẽ xác nhận và tư vấn phương án phù hợp." },
+      {
+        q: "Tem có chống nước không?",
+        a: "Tùy chất liệu. Decal nhựa PVC chống nước tốt, phù hợp ly đá. Decal giấy chỉ dùng ly không đổ mồ hôi.",
+      },
+      {
+        q: "Đặt số lượng ít có nhận không?",
+        a: "Bạn gửi số lượng dự kiến, tôi sẽ xác nhận và tư vấn phương án phù hợp.",
+      },
     ],
   },
   {
@@ -91,8 +98,14 @@ export const products: Product[] = [
       "Decal xi bạc — sang trọng, dùng mỹ phẩm",
     ],
     faqs: [
-      { q: "Có cán màng bóng/mờ không?", a: "Có. Bạn cho biết nhu cầu, tôi sẽ tư vấn loại màng phù hợp." },
-      { q: "Tem có bám chắc trên chai nhựa không?", a: "Phụ thuộc bề mặt và keo. Bạn gửi mẫu chai, tôi tư vấn loại keo phù hợp." },
+      {
+        q: "Có cán màng bóng/mờ không?",
+        a: "Có. Bạn cho biết nhu cầu, tôi sẽ tư vấn loại màng phù hợp.",
+      },
+      {
+        q: "Tem có bám chắc trên chai nhựa không?",
+        a: "Phụ thuộc bề mặt và keo. Bạn gửi mẫu chai, tôi tư vấn loại keo phù hợp.",
+      },
     ],
   },
   {
@@ -118,8 +131,14 @@ export const products: Product[] = [
       "Giấy duplex — phổ thông, giá hợp lý",
     ],
     faqs: [
-      { q: "Có in theo kích thước riêng không?", a: "Có. Bạn gửi kích thước và hình dạng mong muốn, tôi sẽ tư vấn và báo giá." },
-      { q: "Có làm mẫu trước không?", a: "Tùy đơn. Bạn trao đổi trực tiếp, tôi sẽ thông báo khả năng làm mẫu." },
+      {
+        q: "Có in theo kích thước riêng không?",
+        a: "Có. Bạn gửi kích thước và hình dạng mong muốn, tôi sẽ tư vấn và báo giá.",
+      },
+      {
+        q: "Có làm mẫu trước không?",
+        a: "Tùy đơn. Bạn trao đổi trực tiếp, tôi sẽ thông báo khả năng làm mẫu.",
+      },
     ],
   },
   {
@@ -145,8 +164,14 @@ export const products: Product[] = [
       "Giấy ivory — mịn, in đẹp",
     ],
     faqs: [
-      { q: "Có quai xách không?", a: "Có. Bạn chọn quai giấy, quai ruy băng, hoặc quai dây." },
-      { q: "Cán màng bóng được không?", a: "Được. Cán màng giúp túi cứng hơn và chống nước nhẹ." },
+      {
+        q: "Có quai xách không?",
+        a: "Có. Bạn chọn quai giấy, quai ruy băng, hoặc quai dây.",
+      },
+      {
+        q: "Cán màng bóng được không?",
+        a: "Được. Cán màng giúp túi cứng hơn và chống nước nhẹ.",
+      },
     ],
   },
   {
@@ -172,8 +197,14 @@ export const products: Product[] = [
       "Giấy tráng sinh học — thân thiện môi trường",
     ],
     faqs: [
-      { q: "Có chứng nhận an toàn thực phẩm không?", a: "Tùy loại giấy. Bạn cho biết yêu cầu cụ thể, tôi sẽ xác nhận với nhà cung cấp." },
-      { q: "Chịu được đồ nóng bao nhiêu độ?", a: "Phụ thuộc chất liệu. Bạn cho biết món dự kiến đựng, tôi tư vấn loại phù hợp." },
+      {
+        q: "Có chứng nhận an toàn thực phẩm không?",
+        a: "Tùy loại giấy. Bạn cho biết yêu cầu cụ thể, tôi sẽ xác nhận với nhà cung cấp.",
+      },
+      {
+        q: "Chịu được đồ nóng bao nhiêu độ?",
+        a: "Phụ thuộc chất liệu. Bạn cho biết món dự kiến đựng, tôi tư vấn loại phù hợp.",
+      },
     ],
   },
   {
@@ -199,17 +230,39 @@ export const products: Product[] = [
       "Giấy kraft — phong cách tự nhiên",
     ],
     faqs: [
-      { q: "Có cán màng mờ/bóng không?", a: "Có. Cán màng giúp card cứng và bền màu hơn." },
-      { q: "Có ép kim không?", a: "Có, tùy ngân sách. Ép kim tạo điểm nhấn sang trọng." },
+      {
+        q: "Có cán màng mờ/bóng không?",
+        a: "Có. Cán màng giúp card cứng và bền màu hơn.",
+      },
+      {
+        q: "Có ép kim không?",
+        a: "Có, tùy ngân sách. Ép kim tạo điểm nhấn sang trọng.",
+      },
     ],
   },
 ];
 
 export const processSteps = [
-  { num: 1, title: "Gửi yêu cầu",       desc: "Điền form hoặc gọi trực tiếp. Càng chi tiết càng nhanh." },
-  { num: 2, title: "Tư vấn & báo giá",  desc: "Tư vấn chất liệu, quy cách, số lượng phù hợp ngân sách." },
-  { num: 3, title: "Xác nhận & sản xuất", desc: "Chốt đơn, kiểm tra file thiết kế, đưa vào in." },
-  { num: 4, title: "Giao hàng",         desc: "Giao toàn quốc, đóng gói cẩn thận, đúng hẹn." },
+  {
+    num: 1,
+    title: "Gửi yêu cầu",
+    desc: "Điền form hoặc gọi trực tiếp. Càng chi tiết càng nhanh.",
+  },
+  {
+    num: 2,
+    title: "Tư vấn & báo giá",
+    desc: "Tư vấn chất liệu, quy cách, số lượng phù hợp ngân sách.",
+  },
+  {
+    num: 3,
+    title: "Xác nhận & sản xuất",
+    desc: "Chốt đơn, kiểm tra file thiết kế, đưa vào in.",
+  },
+  {
+    num: 4,
+    title: "Giao hàng",
+    desc: "Giao toàn quốc, đóng gói cẩn thận, đúng hẹn.",
+  },
 ];
 
 export const faqs = [

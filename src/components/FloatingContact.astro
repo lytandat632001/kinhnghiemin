@@ -1,6 +1,5 @@
 ---
 import { site } from "../config/site";
-
 const telHref = `tel:${site.phone}`;
 const zaloHref = `https://zalo.me/${site.zalo}`;
 ---
@@ -19,8 +18,8 @@ const zaloHref = `https://zalo.me/${site.zalo}`;
 <style>
   .floating-contact {
     position: fixed;
-    right: 16px;
-    bottom: 20px;
+    right: 20px;
+    bottom: 24px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -28,24 +27,52 @@ const zaloHref = `https://zalo.me/${site.zalo}`;
   }
 
   .float-btn {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    box-shadow: var(--shadow-md);
     font-weight: 700;
     font-size: 0.75rem;
-    transition: transform 0.2s;
+    transition: all var(--transition-base);
+    position: relative;
   }
 
+  .float-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    z-index: -1;
+  }
+
+  .float-phone {
+    background: var(--color-primary);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  }
+  .float-phone::before { background: var(--color-primary); }
+
+  .float-zalo {
+    background: #0068ff;
+    box-shadow: 0 4px 16px rgba(0, 104, 255, 0.4);
+  }
+  .float-zalo::before { background: #0068ff; }
+
   .float-btn:hover {
-    transform: scale(1.08);
+    transform: scale(1.1);
     color: #fff;
   }
 
-  .float-phone { background: var(--color-primary); }
-  .float-zalo  { background: #0068ff; }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+
+  @media (max-width: 640px) {
+    .floating-contact { right: 12px; bottom: 16px; }
+    .float-btn { width: 50px; height: 50px; }
+  }
 </style>
