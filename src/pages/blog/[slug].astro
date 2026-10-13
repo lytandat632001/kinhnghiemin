@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.pubDate.toLocaleDateString("vi-VN", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+---
+
+<BaseLayout title={`${post.data.title} — In Ấn Pro`} description={post.data.description}>
+  <article class="post">
+    <div class="container container-narrow">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Trang chủ</a>
+        <span>/</span>
+        <a href="/blog">Blog</a>
+        <span>/</span>
+        <span class="current">{post.data.title}</span>
+      </nav>
+
+      <header class="post-header">
+        <h1>{post.data.title}</h1>
+        <div class="post-meta">
+          <span>{formattedDate}</span>
+          {post.data.author && <span>• {post.data.author}</span>}
+        </div>
+        {post.data.tags.length > 0 && (
+          <div class="post-tags">
+            {post.data.tags.map((t) => <span>{t}</span>)}
+          </div>
+        )}
+      </header>
+
+      <div class="post-content">
+        <Content />
+      </div>
+
+      <div class="post-cta">
+        <p>Cần tư vấn về sản phẩm in ấn?</p>
+        <a href="/bao-gia" class="btn btn-primary">Yêu cầu báo giá</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .container-narrow {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    padding: var(--space-md) 0;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a { color: var(--color-text-muted); }
+  .breadcrumb a:hover { color: var(--color-primary); }
+  .breadcrumb .current {
+    color: var(--color-text);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+  }
+
+  .post-header {
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-lg);
+  }
+
+  .post-header h1 { margin-bottom: var(--space-sm); }
+
+  .post-meta {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .post-tags span {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Nội dung bài viết — style cho thẻ HTML sinh từ Markdown */
+  .post-content :global(h2) {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    font-size: 1.5rem;
+  }
+
+  .post-content :global(h3) {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+    font-size: 1.2rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: var(--space-sm);
+    line-height: 1.75;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin: var(--space-sm) 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+  }
+
+  .post-content :global(strong) {
+    color: var(--color-text);
+  }
+
+  .post-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .post-content :global(img) {
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--color-primary);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-soft);
+    margin: var(--space-md) 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .post-cta {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .post-cta p {
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import { faqs } from "../config/site";
+---
+
+<section class="faq-section">
+  <div class="container">
+    <h2>Câu hỏi thường gặp</h2>
+
+    <div class="faq-list">
+      {faqs.map((item) => (
+        <details class="faq-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section { padding: var(--space-xl) 0; }
+  .faq-section h2 { text-align: center; margin-bottom: var(--space-lg); }
+
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq-item {
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .faq-item summary {
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 2rem 0.5rem 0;
+    list-style: none;
+    position: relative;
+  }
+
+  .faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-primary);
+  }
+
+  .faq-item[open] summary::after { content: "−"; }
+
+  .faq-item p {
+    color: var(--color-text-muted);
+    padding: 0.5rem 0 0.75rem;
+    font-size: 0.95rem;
+  }
+</style>

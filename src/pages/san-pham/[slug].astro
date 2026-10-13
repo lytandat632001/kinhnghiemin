@@ -1,0 +1,272 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { products } from "../../config/site";
+
+export function getStaticPaths() {
+  return products.map((p) => ({
+    params: { slug: p.slug },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<BaseLayout
+  title={`${product.name} — In Ấn Pro`}
+  description={product.desc}
+>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-wrap">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Trang chủ</a>
+        <span>/</span>
+        <a href="/san-pham">Sản phẩm</a>
+        <span>/</span>
+        <span class="current">{product.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO SẢN PHẨM -->
+  <section class="product-hero">
+    <div class="container product-hero-inner">
+      <div class="product-hero-icon" aria-hidden="true">{product.icon}</div>
+      <div>
+        <h1>{product.name}</h1>
+        <p class="lead">{product.desc}</p>
+        <a href="/bao-gia" class="btn btn-primary">Yêu cầu báo giá</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NỘI DUNG CHI TIẾT -->
+  <section class="product-body">
+    <div class="container product-body-inner">
+      <div class="product-intro">
+        <h2>Giới thiệu</h2>
+        <p>{product.intro}</p>
+      </div>
+
+      <div class="product-grid-2">
+        <div class="info-card">
+          <h3>Đối tượng phù hợp</h3>
+          <ul>
+            {product.useCases.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Ứng dụng phổ biến</h3>
+          <ul>
+            {product.applications.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Lựa chọn chất liệu</h3>
+          <ul>
+            {product.materials.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div class="info-card info-card--note">
+          <h3>Cần xác nhận thêm</h3>
+          <p>
+            Kích thước, kỹ thuật in và giá sẽ được tư vấn trực tiếp dựa
+            trên sản phẩm thực tế của bạn.
+          </p>
+        </div>
+      </div>
+
+      {product.faqs.length > 0 && (
+        <div class="product-faq">
+          <h2>Câu hỏi thường gặp về {product.name.toLowerCase()}</h2>
+          <div class="faq-list">
+            {product.faqs.map((item) => (
+              <details class="faq-item">
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div class="product-cta">
+        <h2>Sẵn sàng đặt in?</h2>
+        <p>Gửi yêu cầu để được tư vấn chất liệu, quy cách và báo giá phù hợp.</p>
+        <a href="/bao-gia" class="btn btn-primary">Yêu cầu báo giá</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* BREADCRUMB */
+  .breadcrumb-wrap {
+    background: var(--color-bg-soft);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    padding: var(--space-sm) 0;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a { color: var(--color-text-muted); }
+  .breadcrumb a:hover { color: var(--color-primary); }
+  .breadcrumb .current { color: var(--color-text); font-weight: 500; }
+
+  /* HERO SẢN PHẨM */
+  .product-hero {
+    padding: var(--space-xl) 0;
+    background: var(--color-primary-light);
+  }
+
+  .product-hero-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .product-hero-icon {
+    font-size: 5rem;
+    line-height: 1;
+  }
+
+  .product-hero h1 { margin-bottom: var(--space-xs); }
+
+  .product-hero .lead {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: var(--space-md);
+    max-width: 600px;
+  }
+
+  /* BODY */
+  .product-body { padding: var(--space-xl) 0; }
+
+  .product-body-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .product-intro h2 { margin-bottom: var(--space-sm); }
+  .product-intro p { color: var(--color-text-muted); max-width: 720px; }
+
+  .product-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+  }
+
+  .info-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    font-size: 1.1rem;
+  }
+
+  .info-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .info-card li {
+    padding-left: 1.4rem;
+    position: relative;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .info-card li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .info-card--note {
+    background: var(--color-bg-soft);
+    border-style: dashed;
+  }
+
+  .info-card--note p { color: var(--color-text-muted); font-size: 0.95rem; }
+
+  /* FAQ */
+  .product-faq h2 { margin-bottom: var(--space-md); }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq-item {
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .faq-item summary {
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 2rem 0.5rem 0;
+    list-style: none;
+    position: relative;
+  }
+
+  .faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-primary);
+  }
+
+  .faq-item[open] summary::after { content: "−"; }
+
+  .faq-item p {
+    color: var(--color-text-muted);
+    padding: 0.5rem 0 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  /* CTA */
+  .product-cta {
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .product-cta h2 {
+    color: #fff;
+    margin-bottom: var(--space-xs);
+  }
+
+  .product-cta p {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-md);
+  }
+</style>

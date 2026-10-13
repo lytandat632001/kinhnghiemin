@@ -1,0 +1,82 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+}
+
+const { slug, title, description, pubDate, tags } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString("vi-VN", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+---
+
+<a href={`/blog/${slug}`} class="blog-card">
+  <div class="blog-card-meta">{formattedDate}</div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {tags.length > 0 && (
+    <div class="blog-card-tags">
+      {tags.map((t) => <span>{t}</span>)}
+    </div>
+  )}
+</a>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    color: var(--color-text);
+    height: 100%;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+  }
+
+  .blog-card-meta {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-card h3 {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  .blog-card p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  .blog-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: var(--space-sm);
+  }
+
+  .blog-card-tags span {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+</style>

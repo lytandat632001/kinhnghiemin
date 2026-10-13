@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductGrid from "../../components/ProductGrid.astro";
+---
+
+<BaseLayout
+  title="Sản phẩm in ấn — In Ấn Pro"
+  description="Các nhóm sản phẩm in ấn: tem dán ly, decal, hộp giấy, túi giấy, bao bì thực phẩm, danh thiếp."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Sản phẩm in ấn</h1>
+      <p>Chọn nhóm sản phẩm để xem chi tiết và yêu cầu báo giá.</p>
+    </div>
+  </section>
+
+  <ProductGrid />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-lg) 0;
+    background: var(--color-primary-light);
+    text-align: center;
+  }
+
+  .page-hero h1 {
+    margin-bottom: var(--space-xs);
+  }
+
+  .page-hero p {
+    color: var(--color-text-muted);
+  }
+</style>

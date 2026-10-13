@@ -1,0 +1,66 @@
+---
+import { processSteps } from "../config/site";
+---
+
+<section class="process-section">
+  <div class="container">
+    <h2>Quy trình làm việc</h2>
+    <p class="section-desc">4 bước đơn giản từ lúc bạn gửi yêu cầu đến khi nhận hàng.</p>
+
+    <div class="process-steps">
+      {processSteps.map((s) => (
+        <div class="step">
+          <div class="step-num">{s.num}</div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-section {
+    padding: var(--space-xl) 0;
+    background: var(--color-bg-soft);
+  }
+
+  .process-section h2 { text-align: center; margin-bottom: var(--space-xs); }
+
+  .section-desc {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .step {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    text-align: center;
+    border: 1px solid var(--color-border);
+  }
+
+  .step-num {
+    width: 42px;
+    height: 42px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin: 0 auto var(--space-sm);
+    font-size: 1.1rem;
+  }
+
+  .step h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .step p { color: var(--color-text-muted); font-size: 0.92rem; }
+</style>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import ProcessSteps from "../components/ProcessSteps.astro";
+import BlogCard from "../components/BlogCard.astro";
+import FaqList from "../components/FaqList.astro";
+import { getCollection } from "astro:content";
+
+const latestPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <Hero
+    title="Giải pháp in ấn cho quán cà phê, cửa hàng và doanh nghiệp"
+    subtitle="Tư vấn chọn chất liệu, quy cách in, số lượng phù hợp với nhu cầu thực tế — giúp bạn tiết kiệm chi phí mà vẫn đẹp."
+  />
+  <ProductGrid />
+  <ProcessSteps />
+
+  {latestPosts.length > 0 && (
+    <section class="latest-posts">
+      <div class="container">
+        <h2>Bài viết mới</h2>
+        <p class="section-desc">Kiến thức tư vấn in ấn dành cho chủ quán và doanh nghiệp.</p>
+        <div class="blog-grid">
+          {latestPosts.map((post) => (
+            <BlogCard
+              slug={post.id}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+        <div class="view-all">
+          <a href="/blog" class="btn btn-outline">Xem tất cả bài viết</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <FaqList />
+</BaseLayout>
+
+<style>
+  .latest-posts { padding: var(--space-xl) 0; }
+  .latest-posts h2 { text-align: center; margin-bottom: var(--space-xs); }
+
+  .section-desc {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .view-all {
+    text-align: center;
+    margin-top: var(--space-lg);
+  }
+</style>

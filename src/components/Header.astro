@@ -1,0 +1,86 @@
+---
+import { site, nav } from "../config/site";
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">{site.shortName}</span>
+      <span class="logo-text">{site.name}</span>
+    </a>
+
+    <nav class="main-nav">
+      {nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+      <a href="/bao-gia" class="btn btn-primary">Yêu cầu báo giá</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: #fff;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-text);
+  }
+
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .main-nav a {
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .main-nav a:not(.btn):hover {
+    color: var(--color-primary);
+  }
+
+  .main-nav .btn-primary {
+    color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .main-nav a:not(.btn) {
+      display: none;
+    }
+  }
+</style>

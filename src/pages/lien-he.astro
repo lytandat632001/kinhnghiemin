@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../config/site";
+---
+
+<BaseLayout
+  title="Liên hệ — In Ấn Pro"
+  description="Thông tin liên hệ tư vấn in ấn."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Liên hệ</h1>
+      <p>Gọi điện, nhắn Zalo hoặc gửi yêu cầu để được tư vấn.</p>
+    </div>
+  </section>
+
+  <section class="contact-body">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <h3>📞 Điện thoại</h3>
+        <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p>
+      </div>
+
+      <div class="contact-card">
+        <h3>💬 Zalo</h3>
+        <p><a href={`https://zalo.me/${site.zalo}`} target="_blank" rel="noopener">Chat qua Zalo</a></p>
+      </div>
+
+      <div class="contact-card">
+        <h3>✉️ Email</h3>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+
+      <div class="contact-card">
+        <h3>📝 Yêu cầu báo giá</h3>
+        <p><a href="/bao-gia">Điền form báo giá →</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-lg) 0;
+    background: var(--color-primary-light);
+    text-align: center;
+  }
+
+  .contact-body { padding: var(--space-xl) 0; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .contact-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    text-align: center;
+  }
+
+  .contact-card h3 { margin-bottom: var(--space-sm); }
+
+  .contact-card a {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+</style>

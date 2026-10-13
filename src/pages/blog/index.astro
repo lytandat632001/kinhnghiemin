@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Blog — In Ấn Pro"
+  description="Bài viết tư vấn về in ấn: chọn chất liệu, quy cách, chuẩn bị file, tiết kiệm chi phí."
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Blog tư vấn in ấn</h1>
+      <p>Kiến thức và kinh nghiệm giúp bạn chọn đúng sản phẩm, tiết kiệm chi phí.</p>
+    </div>
+  </section>
+
+  <section class="blog-body">
+    <div class="container">
+      {posts.length === 0 ? (
+        <p class="empty">Chưa có bài viết nào.</p>
+      ) : (
+        <div class="blog-grid">
+          {posts.map((post) => (
+            <BlogCard
+              slug={post.id}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-lg) 0;
+    background: var(--color-primary-light);
+    text-align: center;
+  }
+
+  .page-hero h1 { margin-bottom: var(--space-xs); }
+  .page-hero p { color: var(--color-text-muted); }
+
+  .blog-body { padding: var(--space-xl) 0; }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .empty { text-align: center; color: var(--color-text-muted); }
+</style>

@@ -1,0 +1,21 @@
+---
+import { site } from "../config/site";
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© {new Date().getFullYear()} {site.name} — Website đang trong quá trình xây dựng.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-bg-soft);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+    margin-top: var(--space-xl);
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+</style>
