@@ -6,7 +6,7 @@ export const site = {
   name: "Kinh Nghiệm In",
   shortName: "KNI",
   description:
-    "Chia sẻ kinh nghiệm chọn chất liệu, quy cách in và nhà in phù hợp cho quán cà phê, cửa hàng và doanh nghiệp.",
+    "Xưởng in hộp giấy, túi giấy, ly in logo và decal. Tư vấn quy cách, hỗ trợ thiết kế đơn giản và nhận yêu cầu báo giá trực tiếp.",
   phone: "0349458387",
   phoneDisplay: "0349 458387",
   zalo: "0349458387",
@@ -43,6 +43,51 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    slug: "hop-giay",
+    icon: "📦",
+    name: "Hộp giấy",
+    desc: "Hộp giấy in theo kích thước và nhận diện thương hiệu của bạn.",
+    intro:
+      "Hộp giấy được tư vấn theo sản phẩm cần đóng gói, cách sử dụng và hình ảnh thương hiệu. Xưởng hỗ trợ trao đổi quy cách, chất liệu và thiết kế đơn giản trước khi in.",
+    useCases: ["Hộp đựng thực phẩm, bánh và quà tặng", "Hộp mỹ phẩm, phụ kiện và sản phẩm bán lẻ", "Bao bì đóng gói cho cửa hàng và doanh nghiệp"],
+    applications: ["Hộp giấy gấp theo kích thước", "Hộp có in logo và thông tin sản phẩm", "Hộp quà tặng theo yêu cầu"],
+    materials: ["Kraft — phong cách tự nhiên", "Ivory — bề mặt sáng, phù hợp in hình ảnh", "Duplex — lựa chọn phổ biến cho hộp giấy"],
+    faqs: [
+      { q: "Chưa có mẫu hộp thì có tư vấn được không?", a: "Được. Bạn cho biết sản phẩm cần đựng và kích thước dự kiến, xưởng sẽ trao đổi phương án quy cách phù hợp." },
+      { q: "Xưởng có hỗ trợ thiết kế không?", a: "Xưởng có thể hỗ trợ tư vấn và thiết kế đơn giản. Hãy mô tả nhu cầu trong form để được trao đổi cụ thể." },
+    ],
+  },
+  {
+    slug: "tui-giay",
+    icon: "🛍️",
+    name: "Túi giấy",
+    desc: "Túi giấy in logo cho cửa hàng, quán và thương hiệu bán lẻ.",
+    intro:
+      "Túi giấy có thể tùy chỉnh kích thước, chất liệu, quai và nội dung in. Xưởng tư vấn theo sản phẩm đựng bên trong và mục đích sử dụng.",
+    useCases: ["Cửa hàng thời trang, mỹ phẩm và phụ kiện", "Tiệm bánh, quán cà phê và cửa hàng quà tặng", "Túi đựng sản phẩm hoặc tài liệu"],
+    applications: ["Túi giấy có quai", "Túi in logo và thông tin thương hiệu", "Túi giấy theo kích thước riêng"],
+    materials: ["Kraft — vẻ ngoài tự nhiên", "Couche — bề mặt in hình ảnh nổi bật", "Ivory — bề mặt sáng và cứng cáp"],
+    faqs: [
+      { q: "Có thể làm túi theo kích thước riêng không?", a: "Có thể trao đổi kích thước theo sản phẩm cần đựng. Gửi số đo hoặc ảnh tham khảo để được tư vấn." },
+      { q: "Có thể in logo lên túi không?", a: "Có. Bạn có thể gửi logo hoặc trao đổi ý tưởng để được hỗ trợ chuẩn bị nội dung in." },
+    ],
+  },
+  {
+    slug: "ly-in-logo",
+    icon: "🥤",
+    name: "Ly in logo",
+    desc: "Ly giấy và ly nhựa in nhận diện cho quán đồ uống, sự kiện và thương hiệu.",
+    intro:
+      "Ly in logo giúp thương hiệu xuất hiện trên mỗi đơn hàng mang đi. Xưởng tư vấn loại ly, vị trí in và cách chuẩn bị thiết kế theo nhu cầu sử dụng.",
+    useCases: ["Quán cà phê, trà sữa, nước ép", "Sự kiện, hội nghị và chương trình quảng bá", "Thương hiệu đồ uống cần bao bì mang đi"],
+    applications: ["Ly giấy in logo", "Ly nhựa in nhận diện", "Ly theo dung tích và nhu cầu sử dụng"],
+    materials: ["Ly giấy — phù hợp đồ uống nóng hoặc lạnh tùy cấu tạo", "Ly nhựa — phù hợp đồ uống lạnh và mang đi"],
+    faqs: [
+      { q: "Tôi chưa có file thiết kế ly thì sao?", a: "Bạn có thể gửi logo, tên thương hiệu hoặc ý tưởng. Xưởng sẽ trao đổi phương án thiết kế đơn giản phù hợp." },
+      { q: "Cần cung cấp gì để được báo giá?", a: "Nếu biết, hãy gửi loại ly, dung tích và số lượng dự kiến. Nếu chưa rõ, cứ để lại thông tin liên hệ để được tư vấn." },
+    ],
+  },
+  {
     slug: "tem-dan-ly",
     icon: "🥤",
     name: "Tem dán ly",
@@ -71,14 +116,14 @@ export const products: Product[] = [
       },
       {
         q: "Đặt số lượng ít có nhận không?",
-        a: "Bạn gửi số lượng dự kiến, tôi sẽ xác nhận và tư vấn phương án phù hợp.",
+        a: "Bạn gửi số lượng dự kiến để xưởng xác nhận và tư vấn phương án phù hợp.",
       },
     ],
   },
   {
     slug: "decal",
     icon: "🏷️",
-    name: "Decal & tem nhãn",
+    name: "Decal sản phẩm",
     desc: "Tem dán sản phẩm, chai lọ, hộp, túi theo yêu cầu.",
     intro:
       "Decal và tem nhãn dùng để dán lên sản phẩm, giúp nhận diện thương hiệu và cung cấp thông tin cần thiết cho người mua.",
@@ -100,77 +145,11 @@ export const products: Product[] = [
     faqs: [
       {
         q: "Có cán màng bóng/mờ không?",
-        a: "Có. Bạn cho biết nhu cầu, tôi sẽ tư vấn loại màng phù hợp.",
+        a: "Có. Bạn cho biết nhu cầu để xưởng tư vấn loại màng phù hợp.",
       },
       {
         q: "Tem có bám chắc trên chai nhựa không?",
-        a: "Phụ thuộc bề mặt và keo. Bạn gửi mẫu chai, tôi tư vấn loại keo phù hợp.",
-      },
-    ],
-  },
-  {
-    slug: "hop-giay",
-    icon: "📦",
-    name: "Hộp giấy",
-    desc: "Hộp bao bì cho thực phẩm, bánh ngọt, quà tặng.",
-    intro:
-      "Hộp giấy giúp bảo vệ sản phẩm và nâng cao trải nghiệm khách hàng khi nhận hàng.",
-    useCases: [
-      "Tiệm bánh, tiệm bánh ngọt",
-      "Cửa hàng quà tặng, đặc sản",
-      "Shop thời trang, phụ kiện",
-    ],
-    applications: [
-      "Hộp bánh, hộp bánh quy",
-      "Hộp quà tặng theo mùa",
-      "Hộp đựng phụ kiện, mỹ phẩm",
-    ],
-    materials: [
-      "Giấy mỹ thuật — đẹp, phù hợp quà tặng",
-      "Giấy kraft — tự nhiên, thân thiện môi trường",
-      "Giấy duplex — phổ thông, giá hợp lý",
-    ],
-    faqs: [
-      {
-        q: "Có in theo kích thước riêng không?",
-        a: "Có. Bạn gửi kích thước và hình dạng mong muốn, tôi sẽ tư vấn và báo giá.",
-      },
-      {
-        q: "Có làm mẫu trước không?",
-        a: "Tùy đơn. Bạn trao đổi trực tiếp, tôi sẽ thông báo khả năng làm mẫu.",
-      },
-    ],
-  },
-  {
-    slug: "tui-giay",
-    icon: "🛍️",
-    name: "Túi giấy",
-    desc: "Túi giấy mang thương hiệu cho cửa hàng, shop.",
-    intro:
-      "Túi giấy vừa là bao bì, vừa là kênh quảng bá thương hiệu miễn phí mỗi khi khách mang về.",
-    useCases: [
-      "Cửa hàng thời trang, phụ kiện",
-      "Tiệm bánh, cửa hàng thực phẩm",
-      "Shop mỹ phẩm, quà tặng",
-    ],
-    applications: [
-      "Túi đựng sản phẩm khi khách mua",
-      "Túi quà tặng cho dịp lễ",
-      "Túi đựng tài liệu, catalogue",
-    ],
-    materials: [
-      "Giấy kraft — tự nhiên, chắc",
-      "Giấy mỹ thuật — sang trọng",
-      "Giấy ivory — mịn, in đẹp",
-    ],
-    faqs: [
-      {
-        q: "Có quai xách không?",
-        a: "Có. Bạn chọn quai giấy, quai ruy băng, hoặc quai dây.",
-      },
-      {
-        q: "Cán màng bóng được không?",
-        a: "Được. Cán màng giúp túi cứng hơn và chống nước nhẹ.",
+        a: "Phụ thuộc bề mặt và keo. Bạn gửi mẫu chai để xưởng tư vấn loại keo phù hợp.",
       },
     ],
   },
@@ -199,11 +178,11 @@ export const products: Product[] = [
     faqs: [
       {
         q: "Có chứng nhận an toàn thực phẩm không?",
-        a: "Tùy loại giấy. Bạn cho biết yêu cầu cụ thể, tôi sẽ xác nhận với nhà cung cấp.",
+        a: "Tùy loại giấy. Bạn cho biết yêu cầu cụ thể để xưởng kiểm tra và phản hồi.",
       },
       {
         q: "Chịu được đồ nóng bao nhiêu độ?",
-        a: "Phụ thuộc chất liệu. Bạn cho biết món dự kiến đựng, tôi tư vấn loại phù hợp.",
+        a: "Phụ thuộc chất liệu. Bạn cho biết món dự kiến đựng để xưởng tư vấn loại phù hợp.",
       },
     ],
   },
@@ -245,41 +224,41 @@ export const products: Product[] = [
 export const processSteps = [
   {
     num: 1,
-    title: "Gửi yêu cầu",
-    desc: "Điền form hoặc gọi trực tiếp. Càng chi tiết càng nhanh.",
+    title: "Gửi nhu cầu",
+    desc: "Cho biết sản phẩm bạn cần, kể cả khi chưa rõ quy cách hoặc chưa có file thiết kế.",
   },
   {
     num: 2,
     title: "Tư vấn & báo giá",
-    desc: "Tư vấn chất liệu, quy cách, số lượng phù hợp ngân sách.",
+    desc: "Cùng trao đổi chất liệu, quy cách, số lượng và phần thiết kế đơn giản nếu cần.",
   },
   {
     num: 3,
-    title: "Xác nhận & sản xuất",
-    desc: "Chốt đơn, kiểm tra file thiết kế, đưa vào in.",
+    title: "Duyệt mẫu & in",
+    desc: "Thống nhất nội dung, kiểm tra thiết kế và xác nhận trước khi sản xuất.",
   },
   {
     num: 4,
     title: "Giao hàng",
-    desc: "Giao toàn quốc, đóng gói cẩn thận, đúng hẹn.",
+    desc: "Thống nhất thời gian và phương thức nhận hàng theo từng đơn.",
   },
 ];
 
 export const faqs = [
   {
     q: "Tôi chưa biết chọn chất liệu nào, có được tư vấn không?",
-    a: "Có. Bạn chỉ cần cho biết sản phẩm dùng cho mục đích gì, tôi sẽ gợi ý chất liệu và quy cách phù hợp nhất với ngân sách.",
+    a: "Có. Hãy cho biết sản phẩm cần in và mục đích sử dụng. Xưởng sẽ cùng bạn trao đổi chất liệu, quy cách và số lượng phù hợp.",
   },
   {
     q: "Bao lâu thì có hàng?",
-    a: "Thời gian phụ thuộc số lượng và kỹ thuật gia công. Sau khi bạn gửi yêu cầu, tôi sẽ báo thời gian cụ thể theo từng đơn.",
+    a: "Thời gian phụ thuộc loại sản phẩm, số lượng và gia công. Xưởng sẽ trao đổi thời gian dự kiến sau khi hiểu rõ yêu cầu.",
   },
   {
     q: "Có nhận in số lượng ít không?",
-    a: "Tùy sản phẩm. Bạn cứ gửi số lượng dự kiến, tôi sẽ xác nhận có nhận hay không và tư vấn phương án phù hợp.",
+    a: "Tùy sản phẩm và quy cách. Bạn cứ gửi số lượng dự kiến để xưởng kiểm tra và tư vấn phương án phù hợp.",
   },
   {
     q: "Tôi cần chuẩn bị file thiết kế như thế nào?",
-    a: "Sau khi bạn gửi yêu cầu, tôi sẽ liên hệ hướng dẫn chi tiết. Về cơ bản cần file gốc (AI, PSD, PDF) hoặc ảnh độ phân giải cao.",
+    a: "Nếu đã có file, bạn có thể trao đổi gửi qua Zalo hoặc email. Nếu chưa có, hãy mô tả ý tưởng; xưởng có thể tư vấn phần thiết kế đơn giản.",
   },
 ];

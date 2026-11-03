@@ -2,7 +2,7 @@
 title: "Cách chọn tem dán ly phù hợp với từng loại ly"
 description: "Tem dán ly nào phù hợp với ly nhựa, ly giấy, ly thủy tinh? Hướng dẫn chọn chất liệu, keo dán và kích thước phù hợp."
 pubDate: 2026-10-12
-author: "In Ấn Pro"
+author: "Kinh Nghiệm In"
 tags: ["tem dán ly", "chất liệu", "hướng dẫn"]
 ---
 

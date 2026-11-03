@@ -2,7 +2,7 @@
 title: "Cách chuẩn bị file thiết kế trước khi gửi in"
 description: "Hướng dẫn chuẩn bị file thiết kế đúng chuẩn để tránh lỗi khi in: độ phân giải, hệ màu, vùng tràn lề, font chữ."
 pubDate: 2026-10-10
-author: "In Ấn Pro"
+author: "Kinh Nghiệm In"
 tags: ["file thiết kế", "hướng dẫn", "in ấn"]
 ---
 

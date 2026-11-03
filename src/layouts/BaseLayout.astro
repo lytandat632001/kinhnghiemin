@@ -22,19 +22,18 @@ const {
   noindex = false,
 } = Astro.props;
 
-// Domain chính thức
-const PRIMARY_DOMAIN = "https://kinhnghiemin.pages.dev";
+const primaryDomain = site.siteUrl.replace(/\/+$/, "");
 
 // URL chuẩn của trang
 const canonicalURL = new URL(
   Astro.url.pathname,
-  PRIMARY_DOMAIN
+  primaryDomain
 ).href;
 
 // Ảnh chia sẻ mạng xã hội
 const ogImage = image.startsWith("http")
   ? image
-  : new URL(image, PRIMARY_DOMAIN).href;
+  : new URL(image, `${primaryDomain}/`).href;
 ---
 
 <!doctype html>
@@ -58,7 +57,7 @@ const ogImage = image.startsWith("http")
     <link
       rel="sitemap"
       type="application/xml"
-      href={`${PRIMARY_DOMAIN}/sitemap-index.xml`}
+      href={`${primaryDomain}/sitemap.xml`}
     />
 
     <!-- Open Graph -->
