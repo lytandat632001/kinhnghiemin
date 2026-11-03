@@ -1,5 +1,78 @@
 import { site } from "../config/site";
 
+interface QuoteResponse {
+  ok?: boolean;
+  saved?: boolean;
+  emailSent?: boolean;
+  message?: string;
+  warning?: string;
+  error?: string;
+}
+
+interface QuotePayload {
+  name: string;
+  phone: string;
+  product: string;
+  size: string;
+  quantity: string;
+  message: string;
+}
+
+function sendQuote(payload: QuotePayload): Promise<QuoteResponse> {
+  return new Promise((resolve, reject) => {
+    const callbackName = `__quoteCallback_${Date.now()}_${Math.random()
+      .toString(36)
+      .slice(2)}`;
+    const callbackWindow = window as unknown as Record<
+      string,
+      (response: QuoteResponse) => void
+    >;
+    const script = document.createElement("script");
+    let settled = false;
+    let timeoutId = 0;
+
+    const cleanup = () => {
+      window.clearTimeout(timeoutId);
+      delete callbackWindow[callbackName];
+      script.remove();
+    };
+
+    const fail = (error: Error) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(error);
+    };
+
+    callbackWindow[callbackName] = (response) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(response);
+    };
+
+    script.onerror = () =>
+      fail(
+        new Error(
+          "Không kết nối được Apps Script. Hãy kiểm tra URL triển khai Web App.",
+        ),
+      );
+
+    timeoutId = window.setTimeout(
+      () => fail(new Error("Apps Script không phản hồi. Vui lòng thử lại sau.")),
+      20000,
+    );
+
+    const params = new URLSearchParams({
+      ...payload,
+      callback: callbackName,
+    });
+    script.src = `${site.formEndpoint}?${params.toString()}`;
+    script.async = true;
+    document.head.appendChild(script);
+  });
+}
+
 export function initQuoteForm() {
   const form = document.getElementById("quote-form") as HTMLFormElement | null;
   if (!form) return;
@@ -25,6 +98,11 @@ export function initQuoteForm() {
     }
 
     const formData = new FormData(form);
+    if (!formData.get("consent")) {
+      showMessage("Vui lòng xác nhận đồng ý để xưởng liên hệ tư vấn.", "error");
+      return;
+    }
+
     const payload = {
       name: String(formData.get("name") || "").trim(),
       phone: String(formData.get("phone") || "").trim(),
@@ -49,39 +127,30 @@ export function initQuoteForm() {
     submitBtn.textContent = "Đang gửi...";
 
     try {
-      // Tạo URL với query string
-      const params = new URLSearchParams(payload).toString();
-      const url = site.formEndpoint + "?" + params;
+      const result = await sendQuote(payload);
 
-      // Gửi qua thẻ img — không vướng CORS
-      // Apps Script trả JSON (không phải ảnh) → onerror sẽ chạy
-      // Nhưng request ĐÃ đến server thành công
-      await new Promise<void>((resolve) => {
-        const img = new Image();
-        const timeout = setTimeout(() => resolve(), 8000);
-
-        img.onload = () => {
-          clearTimeout(timeout);
-          resolve();
-        };
-        img.onerror = () => {
-          clearTimeout(timeout);
-          resolve();
-        };
-
-        img.src = url;
-      });
-
-      // Đợi 1 giây để Apps Script kịp ghi
-      await new Promise((r) => setTimeout(r, 1000));
+      if (!result.ok || !result.saved) {
+        showMessage(
+          result.error || "Chưa lưu được yêu cầu. Vui lòng thử lại hoặc gọi trực tiếp.",
+          "error",
+        );
+        return;
+      }
 
       showMessage(
-        "Cảm ơn bạn! Yêu cầu đã được ghi nhận. Tôi sẽ liên hệ trong thời gian sớm nhất.",
-        "success"
+        result.emailSent === false
+          ? "Yêu cầu đã lưu. Email thông báo chưa gửi được; xưởng sẽ kiểm tra hộp thư và quyền gửi email."
+          : "Cảm ơn bạn! Yêu cầu đã được lưu. Xưởng sẽ liên hệ trong thời gian sớm nhất.",
+        "success",
       );
       form.reset();
     } catch (err) {
-      showMessage("Lỗi kết nối. Vui lòng thử lại hoặc gọi trực tiếp.", "error");
+      showMessage(
+        err instanceof Error
+          ? err.message
+          : "Lỗi kết nối. Vui lòng thử lại hoặc gọi trực tiếp.",
+        "error",
+      );
     } finally {
       submitting = false;
       submitBtn.disabled = false;
