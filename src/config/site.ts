@@ -13,9 +13,8 @@ export const site = {
   email: "huyennhu1230@gmail.com",
   address: "",
   // Must be the active Apps Script Web App URL ending in /exec.
-  // The currently configured deployment URL responds with HTTP 404 and must be replaced after redeploying Apps Script.
   formEndpoint:
-    "https://script.google.com/macros/s/AKfycBzRyCUtJskgeqmelvowpzG1mTkmZMI86svAdK_m4Hv1wIpQKVn2NyQmbpteba8rUPD2/exec",
+    "https://script.google.com/macros/s/AKfycbzRycUtJskgeqneLvowpzG1mTkmZM86svAdrK_m4Hv1wIpQKVn2NyQmbpteba87uPD2/exec",
   siteUrl: "https://kinhnghiemin.pages.dev",
 };
 
